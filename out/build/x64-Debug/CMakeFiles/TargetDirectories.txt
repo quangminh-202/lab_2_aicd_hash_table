@@ -1,4 +1,0 @@
-C:/Users/DELL/OneDrive/Máy tính/lecture for study/aicd_lab/lab_2_hash_table/out/build/x64-Debug/CMakeFiles/hash_table.dir
-C:/Users/DELL/OneDrive/Máy tính/lecture for study/aicd_lab/lab_2_hash_table/out/build/x64-Debug/CMakeFiles/run_now.dir
-C:/Users/DELL/OneDrive/Máy tính/lecture for study/aicd_lab/lab_2_hash_table/out/build/x64-Debug/CMakeFiles/edit_cache.dir
-C:/Users/DELL/OneDrive/Máy tính/lecture for study/aicd_lab/lab_2_hash_table/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
