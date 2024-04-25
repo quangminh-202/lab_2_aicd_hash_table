@@ -16,7 +16,7 @@ int main() {
     map.insert_or_assign("XXX", 20);
     map.print();
 
-    bool result = map.contains("XXX");
+    bool result = map.contains(20);
     result ? cout << "Yes" << endl : cout << "No" << endl;
     
     map.erase("XXX");

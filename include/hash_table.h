@@ -57,9 +57,6 @@ namespace my_namespace {
 
 
     public:
-        MyUnorderedMap() : _data(0), _size(0) {}
-
-
         MyUnorderedMap(size_t size) : _size(0) {
             if (size == 0)
                 throw std::invalid_argument("size = 0.");
@@ -74,9 +71,9 @@ namespace my_namespace {
             std::random_device rd;
             std::mt19937 gen(rd());
             std::vector<std::string> roman_numerals = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" }; 
-            std::uniform_int_distribution<int> dis(0, roman_numerals.size() - 1);
+            std::uniform_int_distribution<size_t> dis(0, roman_numerals.size() - 1);
             for (size_t i = 0; i < num_random_pairs; ++i) {
-                int random_index = dis(gen);
+                size_t random_index = dis(gen);
                 std::string random_roman = roman_numerals[random_index];
                 int decimal_value = romanToDecimal(random_roman);
                 if (decimal_value != -1) {
@@ -89,7 +86,10 @@ namespace my_namespace {
         }
 
 
-        MyUnorderedMap(const MyUnorderedMap& other) : _size(other._size) {
+        MyUnorderedMap(const MyUnorderedMap& other){
+            if (other._size == 0)
+                throw std::invalid_argument("size = 0.");
+            _size = other._size;
             _data.resize(other._size);
             for (size_t i = 0; i < _size; ++i) {
                 if (!other._data[i].empty)
@@ -166,8 +166,12 @@ namespace my_namespace {
         }
 
 
-        bool contains(const Key& key) {
-            return find(key) != nullptr;
+        bool contains(const Value& value) {
+            for (const auto& pair : _data) {
+                if (!pair.empty && pair.value == value)
+                    return true;
+            }
+            return false;
         }
 
 
@@ -199,6 +203,10 @@ namespace my_namespace {
         size_t size() {
             return _size;
         }
+
+        bool check(const Key& key) {
+            return find(key) != nullptr;
+        }
     };
 
 
@@ -217,7 +225,7 @@ namespace my_namespace {
 
         for (int i = roman.length() - 1; i >= 0; --i) {
             char currentChar = roman[i];
-            if (romanMap.contains(currentChar)) {
+            if (romanMap.check(currentChar)) {
                 int value = *(romanMap.search(currentChar));
                 if (value < prevValue) {
                     decimal -= value;
